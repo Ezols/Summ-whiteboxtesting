@@ -1,2 +1,0 @@
-Result: 15
-userInput: 5

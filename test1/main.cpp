@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -8,24 +9,40 @@ int summ(int n);
 
 int main()
 {
-	int n;
+	cout << "####### This software summs up digits from 1 to n you have entered #######" << endl << endl;
+	int n, value;
 	cout << "Enter a positive integer: ";
 	cin >> n;
 
 	int userInput = n;
 	int result = summ(n);
+	string readValue;
+	string readExpectedValue;
 
+	ifstream myFile("input.txt");
 
-	ofstream myFile("tests.txt");
-	if (myFile.is_open())
- 	{
+		if (!myFile)
+			{
+				cout << "Error opening file!" << endl;
+				cin.get();
+				return 0;
+			}
 
-		myFile << "Result: " << result << endl;
-		myFile << "userInput: " << userInput;
-		
-		myFile.close();
-	}
-	else cout << "Unable to open file";
+		while(myFile.good())
+ 			{
+				cout << "Value read from file: ";
+				myFile >> readValue;
+				cout << readValue;
+				cout << endl;
+
+				cout << "Expected value: ";
+				myFile >> readExpectedValue;
+				cout << readExpectedValue;
+				
+			}
+	myFile.close();
+
+	cout << endl << endl;
 
 	return 0;
 }
@@ -47,7 +64,7 @@ int summ(int n)
 				sum += i;
 			}
 
-			cout << "Sum = " << sum << endl;
+			cout << "Summ from 1 to "<< n << " = " << sum << endl;
 		}
 	return sum;
 }
